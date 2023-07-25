@@ -13,28 +13,28 @@ public class D01WeatherAssignment {
 
     private static final String API_URL = "https://samples.openweathermap.org/data/2.5/forecast/hourly?q=London,us&appid=b6907d289e10d714a6e88b30761fae22";
 
-    private static void printWeather(JSONObject ans) {// need to change
+    private static void printWeather(JSONObject ans) {
         JSONObject weatherData = ans.getJSONArray("weather").getJSONObject(0);
         String mainWeather = weatherData.getString("main");
         String description = weatherData.getString("description");
         System.out.println("Main: " + mainWeather + "\nDescription: " + description + "\n");
     }
 
-    private static void printWind(JSONObject ans) {//need to change
+    private static void printWind(JSONObject ans) {
         JSONObject windData = ans.getJSONObject("wind");
         double speed = windData.getDouble("speed");
         double direction = windData.getDouble("deg");
         System.out.println("Speed: " + speed + "\nDirection: " + direction + "\n");
     }
 
-    private static void printPressure(JSONObject ans) {//need to change
+    private static void printPressure(JSONObject ans) {
         JSONObject mainData = ans.getJSONObject("main");
         double seaLevelPressure = mainData.getDouble("sea_level");
         double groundLevelPressure = mainData.getDouble("grnd_level");
         System.out.println("Pressure\n\tSea Level: " + seaLevelPressure + "\n\tGround Level: " + groundLevelPressure + "\n");
     }
 
-    private static void callApi(String choice, String query) throws Exception {//need to change
+    private static void callApi(String choice, String query) throws Exception {
         URL url = new URL(API_URL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -46,7 +46,6 @@ public class D01WeatherAssignment {
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
                 }
-
                 JSONObject jsonResponse = new JSONObject(response.toString());
                 JSONArray list = jsonResponse.getJSONArray("list");
 
@@ -69,10 +68,8 @@ public class D01WeatherAssignment {
         } else {
             System.out.println("Request failed with HTTP error code: " + connection.getResponseCode());
         }
-
         connection.disconnect();
     }
-
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
 
